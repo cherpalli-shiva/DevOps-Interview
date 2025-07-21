@@ -1,0 +1,30 @@
+Kubernetes Fundamentals: A Comprehensive Study Guide
+Quiz
+Instructions: Answer each question in 2-3 sentences.
+1. What fundamental problem does Kubernetes solve that Docker alone cannot, particularly in enterprise environments? 
+Kubernetes addresses the limitations of single-host Docker deployments by providing a container orchestration platform. It enables management of container lifecycles across multiple hosts, offering features like auto-healing and auto-scaling that are crucial for high availability and efficient resource utilization in production.
+
+2. Describe the primary function of the Kubernetes API Server within the control plane.
+ The API Server acts as the central management entity and the "heart" of Kubernetes. It processes all REST requests for cluster resources (read, write, update) and is the only component that directly interacts with the etcd key-value store.
+
+3.Explain why Pods are considered the lowest deployable unit in Kubernetes, rather than individual containers. 
+While pods encapsulate containers, they are the smallest deployable unit because they provide a necessary wrapper for containers in the Kubernetes ecosystem. A pod defines how a container (or multiple related containers) should run, including shared networking, storage, and resource specifications, enabling Kubernetes to manage them declaratively.
+
+4. How do Kubernetes Deployments contribute to "zero-downtime deployments"? 
+Deployments achieve zero-downtime by orchestrating the rollout of new application versions. They gradually create new pods with the updated image while simultaneously terminating old pods, ensuring continuous service availability without interruption for end-users.
+
+5. What is the core distinction between a Kubernetes ClusterIP Service and a NodePort Service regarding application accessibility? 
+A ClusterIP Service provides an IP address accessible only from within the Kubernetes cluster, making it suitable for internal communication between services. In contrast, a NodePort Service exposes the application on a static port across all nodes, allowing access from within the organization's network by directly hitting a node's IP address and the designated NodePort.
+
+6. Why is an Ingress Controller essential for an Ingress resource to function effectively? 
+An Ingress Controller, such as Nginx or HAProxy, is a specialized load balancer that runs within the Kubernetes cluster. It actively watches for Ingress resources and configures the routing rules defined in them, allowing external traffic to be directed to the correct services based on host or path. Without a controller, the Ingress resource is merely a set of rules with no mechanism to enforce them.
+
+7 .Briefly explain the purpose of Kubernetes RBAC (Role-Based Access Control) in securing a cluster. RBAC in Kubernetes enforces granular permissions based on roles, ensuring that users and applications (via service accounts) have only the necessary access to cluster resources. This principle of least privilege prevents unauthorized actions and enhances overall cluster security by logically isolating access.
+8. When would you choose to use a Kubernetes Secret instead of a ConfigMap, and what key difference supports this choice? 
+You would use a Kubernetes Secret when storing sensitive data, such as database passwords or API keys. The key difference is that Kubernetes encrypts the data stored in Secrets at rest in etcd, providing a layer of security that ConfigMaps, which store non-sensitive data in plain text, do not offer.
+
+9.What role does Kube-State-Metrics play in Kubernetes monitoring, complementing the API Server's exposed metrics?
+Kube-State-Metrics is a dedicated component that extends Kubernetes monitoring by exposing a broader range of metrics about the state of Kubernetes objects like deployments, pods, and services. While the API server offers basic cluster metrics, Kube-State-Metrics provides more detailed, object-specific data crucial for comprehensive observability and troubleshooting.
+
+10. How does a Kubernetes Service achieve "Service Discovery" without relying on dynamic Pod IP addresses? 
+A Kubernetes Service achieves service discovery by identifying and tracking pods using "labels and selectors" rather than their ephemeral IP addresses. Pods are assigned consistent labels, and the service uses these labels to continuously monitor and route traffic to the correct, healthy pods, even if their underlying IPs change due to scaling or auto-healing events.
